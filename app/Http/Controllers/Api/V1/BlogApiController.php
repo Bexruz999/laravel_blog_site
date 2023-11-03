@@ -34,7 +34,7 @@ class BlogApiController extends ApiController
      */
     public function index()
     {
-        return Blog::take(20)->get();
+        return Blog::take(20)->orderBy('id', 'desc')->get();
     }
 
     /**
