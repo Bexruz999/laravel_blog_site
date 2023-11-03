@@ -6,8 +6,6 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\BlogContent;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class BlogApiController extends ApiController
 {
@@ -42,20 +40,8 @@ class BlogApiController extends ApiController
     /**
      * Display the create form
      */
-    public function create(Request $request) {
-
-        $this->validate($request, [
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
-        $image_path = $request->file('image')->store('image', 'public');
-
-        $data = Blog::create([
-            'title' => 'testimg',
-            'slug' => 'testimg',
-            'image' => $image_path
-        ]);
-
-        return response([$data, $image_path], 201);
+    public function create() {
+        return response('blog create view', 201);
     }
 
     /**
@@ -183,8 +169,20 @@ class BlogApiController extends ApiController
      */
     public function update(UpdateBlogRequest $request, string $id)
     {
-        $blog = Blog::find($id);
-        return response([$request->all(), $id, $blog]);
+
+        $image_path = $request->has('image')
+            ? $request->file('image')->store('blog', 'public') : '';
+
+        $blog_content = $request->has('content') ? BlogContent::create(['content' => $request['content']]):'';
+        unset($request['content']);
+
+        $data = $request->all();
+        $data['blog_content_id']    = $blog_content->id;
+        $data['author_id']          = auth()->user()->id;
+        $data['image']              = $image_path;
+
+        $succes = Blog::find($id)->update($data);
+        return response(['blog' => $data, 'succes' => (bool)$succes]);
     }
 
     /**
