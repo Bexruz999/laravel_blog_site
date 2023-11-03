@@ -67,12 +67,7 @@ class AuthApiController extends ApiController
      * @OA\Post(
      *     path="/login",
      *     tags={"Auth"},
-     *     summary="user login",
-     *     @OA\Parameter (
-     *          in="query",
-     *          name="name",
-     *          @OA\Schema (type="string")
-     *     ),
+     *     summary="User Login",
      *     @OA\Parameter (
      *          in="query",
      *          name="email",
@@ -81,11 +76,6 @@ class AuthApiController extends ApiController
      *     @OA\Parameter (
      *          in="query",
      *          name="password",
-     *          @OA\Schema (type="password")
-     *     ),
-     *     @OA\Parameter (
-     *          in="query",
-     *          name="password_confirmation",
      *          @OA\Schema (type="password")
      *     ),
      *     @OA\Response (
@@ -103,8 +93,6 @@ class AuthApiController extends ApiController
      * )
      */
     public function login(LoginRequest $request) {
-
-        unset($request['password_confirmation']);
 
         $user = User::where('email', $request['email'])->first();
 

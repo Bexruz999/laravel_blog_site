@@ -66,16 +66,9 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "user login",
+                "summary": "User Login",
                 "operationId": "6f53ff6734e8c3ed37d8f40c7e24dd52",
                 "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "email",
                         "in": "query",
@@ -85,13 +78,6 @@
                     },
                     {
                         "name": "password",
-                        "in": "query",
-                        "schema": {
-                            "type": "password"
-                        }
-                    },
-                    {
-                        "name": "password_confirmation",
                         "in": "query",
                         "schema": {
                             "type": "password"
