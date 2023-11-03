@@ -165,6 +165,9 @@ return [
         /*
          * Package Service Providers...
          */
+        L5Swagger\L5SwaggerServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        TLE\TLEServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +233,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'TLE' => TLE\Facades\TLEFacade::class
     ],
 
 ];

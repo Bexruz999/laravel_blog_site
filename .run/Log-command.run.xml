@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Log-command" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/artisan" scriptParameters="app:log-command">
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="E:\Programs\OSPanel\modules\php\PHP_8.1\php.exe" />
+      </PhpTestInterpreterSettings>
+    </CommandLine>
+    <method v="2" />
+  </configuration>
+</component>

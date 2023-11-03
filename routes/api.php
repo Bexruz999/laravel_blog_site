@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Api\V1\AuthApiController;
+use App\Http\Controllers\Api\V1\BlogApiController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
-Route::apiResource('blogs', BlogController::class)->only(['index', 'show']);
+//Route::apiResource('blogs', BlogApiController::class)->only(['index', 'show']);
 
-// Protected routes
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/register', [AuthApiController::class, 'register']);
+Route::post('/login', [AuthApiController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::resource('blogs', BlogController::class)->except(['index', 'show']);
+    Route::get('/logout', [AuthApiController::class, 'logout']);
+
+    Route::apiResource('blogs', BlogApiController::class);
 
     Route::get('/user/{id}', function (string $id) {
         return new UserResource(User::findOrFail($id));
